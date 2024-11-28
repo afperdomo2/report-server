@@ -52,6 +52,11 @@ docker-compose up -d
 
 En la ruta `/sql/01-employees.sql` se encuentra un script de SQL, con algunos empleados, para ejecutarlo en la base de datos.
 
+```sh
+# Instalar Prisma ORM
+npx prisma init
+```
+
 ## Test
 
 ```bash
