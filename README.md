@@ -48,6 +48,10 @@ $ npm run start:prod
 docker-compose up -d
 ```
 
+## 💾 Bases de datos
+
+En la ruta `/sql/01-employees.sql` se encuentra un script de SQL, con algunos empleados, para ejecutarlo en la base de datos.
+
 ## Test
 
 ```bash
