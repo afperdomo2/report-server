@@ -1,13 +1,3 @@
-CREATE TABLE employees (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    position VARCHAR(50) NOT NULL,
-    start_date DATE NOT NULL,
-    work_time TIME NOT NULL,
-    hours_per_day INT NOT NULL,
-    work_schedule VARCHAR(50) NOT NULL
-);
-
 INSERT INTO employees (name, position, start_date, work_time, hours_per_day, work_schedule)
 VALUES
 ('Juan Pérez', 'Desarrollador', '2021-01-15', '09:00', 8, 'Lunes a Viernes, 9am - 5pm'),

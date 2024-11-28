@@ -42,6 +42,10 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+## 📗 Swagger - Documentación
+
+<http://localhost:3000/api/docs>
+
 ## 🐳 Docker
 
 ```sh
@@ -53,8 +57,20 @@ docker-compose up -d
 En la ruta `/sql/01-employees.sql` se encuentra un script de SQL, con algunos empleados, para ejecutarlo en la base de datos.
 
 ```sh
-# Instalar Prisma ORM
+# Instalar Prisma ORM en el proyecto
 npx prisma init
+
+# Construye el schema de prisma (Solo si ya se cuenta con una base de datos previa)
+npx prisma db pull
+
+# Genera el cliente de Prisma
+npx prisma generate
+
+# Migraciones - Generar una nueva migración
+npx prisma migrate dev --name MigrationName
+
+# Migraciones - Ejecutar las migraciones y crear la base de datos
+npx prisma migrate dev
 ```
 
 ## Test
