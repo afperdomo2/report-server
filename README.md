@@ -17,6 +17,10 @@ API para generar distintos tipos de reportes, creados con [Nest](https://github.
 npm install
 ```
 
+Librerías:
+
+- [pdfmake](https://pdfmake.github.io/docs/0.1/)
+
 ## 🚀 Running the app
 
 ```bash
