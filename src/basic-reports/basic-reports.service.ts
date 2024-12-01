@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrinterService } from 'src/printer/printer.service';
 
 import { PrismaService } from 'src/services/prisma.service';
-import { getHelloWorldReport } from './reports';
+import { getEmploymentLetterReport, getHelloWorldReport } from './reports';
 
 @Injectable()
 export class BasicReportsService {
@@ -11,12 +11,13 @@ export class BasicReportsService {
     private readonly printerService: PrinterService,
   ) {}
 
-  findAll() {
-    return this.prismaService.employee.findMany();
-  }
-
   helloWorld() {
     const docDefinition = getHelloWorldReport({ name: 'Pedro' });
+    return this.printerService.createPdf(docDefinition);
+  }
+
+  employmentLetter() {
+    const docDefinition = getEmploymentLetterReport();
     return this.printerService.createPdf(docDefinition);
   }
 }
