@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { PrinterService } from 'src/modules/printer/printer.service';
 
+import { PrinterService } from 'src/shared/printer/printer.service';
 import { EmployeesService } from '../employees/employees.service';
 import {
   EmployeementLetterData,
