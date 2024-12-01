@@ -1,7 +1,7 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { PrinterService } from 'src/modules/printer/printer.service';
 
-import { PrismaService } from 'src/modules/prisma/prisma.service';
+import { EmployeesService } from '../employees/employees.service';
 import {
   EmployeementLetterData,
   getEmploymentLetterReport,
@@ -11,8 +11,8 @@ import {
 @Injectable()
 export class BasicReportsService {
   constructor(
-    private readonly prismaService: PrismaService,
     private readonly printerService: PrinterService,
+    private readonly employeesService: EmployeesService,
   ) {}
 
   helloWorld() {
@@ -21,7 +21,7 @@ export class BasicReportsService {
   }
 
   async employmentLetter(employeeId: number) {
-    const employee = await this.getEmployeeById(employeeId);
+    const employee = await this.employeesService.findById(employeeId);
     const data: EmployeementLetterData = {
       employeer: {
         name: 'Pedro Perez',
@@ -32,15 +32,5 @@ export class BasicReportsService {
     };
     const docDefinition = getEmploymentLetterReport(data);
     return this.printerService.createPdf(docDefinition);
-  }
-
-  async getEmployeeById(employeeId: number) {
-    const employee = await this.prismaService.employee.findUnique({
-      where: { id: employeeId },
-    });
-    if (!employee) {
-      throw new NotFoundException('Employee not found');
-    }
-    return employee;
   }
 }
