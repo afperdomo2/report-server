@@ -1,9 +1,5 @@
-import moment from 'moment';
-import {
-  Content,
-  StyleDictionary,
-  TDocumentDefinitions,
-} from 'pdfmake/interfaces';
+import { StyleDictionary, TDocumentDefinitions } from 'pdfmake/interfaces';
+import { headerSection } from './sections/header.section';
 
 const style: StyleDictionary = {
   title: {
@@ -23,26 +19,10 @@ const style: StyleDictionary = {
   },
 };
 
-const logo: Content = {
-  image: 'src/assets/tucan-code-logo.png',
-  width: 90,
-  height: 90,
-  alignment: 'right',
-};
-
 export const getEmploymentLetterReport = () => {
   const docDefinition: TDocumentDefinitions = {
     styles: style,
-    header: {
-      columns: [
-        logo,
-        {
-          text: `${moment().format('DD MMMM YYYY')}`,
-          alignment: 'right',
-          margin: [0, 20, 50, 0],
-        },
-      ],
-    },
+    header: headerSection({}),
     pageMargins: [40, 50, 40, 50],
     content: [
       { text: 'CONSTANCIA DE EMPLEO', style: 'title' },
