@@ -1,4 +1,4 @@
-import { Controller, Get, Res } from '@nestjs/common';
+import { Controller, Get, Param, ParseIntPipe, Res } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 
@@ -20,9 +20,12 @@ export class BasicReportsController {
   }
 
   @ApiOperation({ summary: 'Get an employment letter' })
-  @Get('employment-letter')
-  employmentLetter(@Res() res: Response) {
-    const pdfDoc = this.basicReportsService.employmentLetter();
+  @Get('employment-letter/:employeeId')
+  async employmentLetter(
+    @Res() res: Response,
+    @Param('employeeId', ParseIntPipe) employeeId: number,
+  ) {
+    const pdfDoc = await this.basicReportsService.employmentLetter(employeeId);
     res.setHeader('Content-Type', 'application/pdf');
     pdfDoc.info.Title = 'Employment Letter';
     pdfDoc.pipe(res);
