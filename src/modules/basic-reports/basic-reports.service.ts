@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { PrinterService } from 'src/printer/printer.service';
+import { PrinterService } from 'src/modules/printer/printer.service';
 
-import { PrismaService } from 'src/services/prisma.service';
+import { PrismaService } from 'src/modules/prisma/prisma.service';
 import { getEmploymentLetterReport, getHelloWorldReport } from './reports';
 
 @Injectable()
