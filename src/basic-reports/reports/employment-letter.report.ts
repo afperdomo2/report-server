@@ -1,3 +1,4 @@
+import moment from 'moment';
 import {
   Content,
   StyleDictionary,
@@ -32,13 +33,17 @@ const logo: Content = {
 export const getEmploymentLetterReport = () => {
   const docDefinition: TDocumentDefinitions = {
     styles: style,
-    pageMargins: [40, 50, 40, 50],
     header: {
       columns: [
         logo,
-        { text: `${new Date()}`, alignment: 'right', margin: [0, 20, 20, 0] },
+        {
+          text: `${moment().format('DD MMMM YYYY')}`,
+          alignment: 'right',
+          margin: [0, 20, 50, 0],
+        },
       ],
     },
+    pageMargins: [40, 50, 40, 50],
     content: [
       { text: 'CONSTANCIA DE EMPLEO', style: 'title' },
       {
