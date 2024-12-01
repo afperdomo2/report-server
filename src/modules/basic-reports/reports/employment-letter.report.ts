@@ -1,5 +1,16 @@
+import moment from 'moment';
 import { StyleDictionary, TDocumentDefinitions } from 'pdfmake/interfaces';
 import { headerSection } from './sections/header.section';
+import { Employee } from '@prisma/client';
+
+export interface EmployeementLetterData {
+  employeer: {
+    name: string;
+    position: string;
+    company: string;
+  };
+  employee: Employee;
+}
 
 const style: StyleDictionary = {
   title: {
@@ -8,18 +19,20 @@ const style: StyleDictionary = {
     alignment: 'center',
     margin: [0, 60, 0, 30],
   },
-  body: {
-    fontSize: 12,
-    alignment: 'justify',
-    margin: [0, 0, 0, 70],
-  },
-  signature: {
-    fontSize: 12,
-    bold: true,
-  },
+  body: { fontSize: 12, alignment: 'justify', margin: [0, 0, 0, 70] },
+  signature: { fontSize: 12, bold: true },
 };
 
-export const getEmploymentLetterReport = () => {
+export const getEmploymentLetterReport = (values: EmployeementLetterData) => {
+  const { employee, employeer } = values;
+  const {
+    name: employeerName,
+    position: employeerPosition,
+    company,
+  } = employeer;
+  const { name, position, startDate, hoursPerDay, workSchedule } = employee;
+  const formattedStartDate = moment(startDate).format('DD-MM-YYYY');
+  const emisionDate = moment().format('DD-MM-YYYY');
   const docDefinition: TDocumentDefinitions = {
     styles: style,
     header: headerSection({}),
@@ -27,16 +40,13 @@ export const getEmploymentLetterReport = () => {
     content: [
       { text: 'CONSTANCIA DE EMPLEO', style: 'title' },
       {
-        text: `Yo, [Nombre del Empleador], en mi calidad de [Cargo del Empleador] de [Nombre de la Empresa], por medio de la presente certifico que [Nombre del Empleado] ha sido empleado en nuestra empresa desde el [Fecha de Inicio del Empleado].\n
-        Durante su empleo, el Sr./Sra. [Nombre del Empleado] ha desempeñado el cargo de [Cargo del Empleado], demostrando responsabilidad, compromiso y habilidades profesionales en sus labores.\n
-        La jornada laboral del Sr./ Sra. [Nombre del Empleado] es de [Número de Horas] horas semanales, con un horario de [Horario de Trabajo], cumpliendo con las políticas y procedimientos establecidos por la empresa.\n
-        Esta constancia se expide a solicitud del interesado para los fines que considere conveniente.\n\n`,
+        text: `Yo, ${employeerName}, en mi calidad de ${employeerPosition} de ${company}, por medio de la presente certifico que ${name} ha sido empleado en nuestra empresa desde el ${formattedStartDate}.\n\nDurante su empleo, el Sr./Sra. ${name} ha desempeñado el cargo de ${position}, demostrando responsabilidad, compromiso y habilidades profesionales en sus labores.\n\nLa jornada laboral del Sr./ Sra. ${name} es de ${hoursPerDay} horas semanales, con un horario de ${workSchedule}, cumpliendo con las políticas y procedimientos establecidos por la empresa.\n\nEsta constancia se expide a solicitud del interesado para los fines que considere conveniente.\n\n`,
         style: 'body',
       },
       { text: 'Atentamente,', style: 'signature' },
-      { text: '[Nombre del Empleador]', style: 'signature' },
-      { text: '[Cargo del Empleador]', style: 'signature' },
-      { text: '[Fecha de Emisión]', style: 'signature' },
+      { text: employeerName, style: 'signature' },
+      { text: employeerPosition, style: 'signature' },
+      { text: emisionDate, style: 'signature' },
     ],
     footer: {
       text: 'Este documento es una constancia de empleo y no representa un compromiso laboral.',
