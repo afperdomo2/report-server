@@ -1,5 +1,6 @@
 import { TDocumentDefinitions } from 'pdfmake/interfaces';
 
+import { PAGE_MARGINS } from 'src/constants';
 import { headerSection } from './sections/header.section';
 
 export const getCountriesReport = () => {
@@ -9,7 +10,7 @@ export const getCountriesReport = () => {
       subTitle: 'List of countries',
     }),
     pageOrientation: 'landscape',
-    pageMargins: [40, 110, 40, 50],
+    pageMargins: PAGE_MARGINS,
     content: [
       {
         layout: 'lightHorizontalLines',

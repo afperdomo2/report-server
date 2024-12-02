@@ -2,6 +2,7 @@ import { Employee } from '@prisma/client';
 import moment from 'moment';
 import { StyleDictionary, TDocumentDefinitions } from 'pdfmake/interfaces';
 
+import { PAGE_MARGINS } from 'src/constants';
 import { headerSection } from './sections/header.section';
 
 export interface EmployeementLetterData {
@@ -37,7 +38,7 @@ export const getEmploymentLetterReport = (values: EmployeementLetterData) => {
   const docDefinition: TDocumentDefinitions = {
     styles: style,
     header: headerSection({}),
-    pageMargins: [40, 110, 40, 50],
+    pageMargins: PAGE_MARGINS,
     content: [
       { text: 'CONSTANCIA DE EMPLEO', style: 'title' },
       {
