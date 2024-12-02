@@ -4,6 +4,7 @@ import { PrinterService } from 'src/shared/printer/printer.service';
 import { EmployeesService } from '../employees/employees.service';
 import {
   EmployeementLetterData,
+  getCountriesReport,
   getEmploymentLetterReport,
   getHelloWorldReport,
 } from './reports';
@@ -31,6 +32,11 @@ export class BasicReportsService {
       employee,
     };
     const docDefinition = getEmploymentLetterReport(data);
+    return this.printerService.createPdf(docDefinition);
+  }
+
+  async countriesReport() {
+    const docDefinition = getCountriesReport();
     return this.printerService.createPdf(docDefinition);
   }
 }

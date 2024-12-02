@@ -9,8 +9,8 @@ import { BasicReportsService } from './basic-reports.service';
 export class BasicReportsController {
   constructor(private readonly basicReportsService: BasicReportsService) {}
 
-  @ApiOperation({ summary: 'Get a basic PDF' })
   @Get('hello-world')
+  @ApiOperation({ summary: 'Get a basic PDF' })
   basicPdf(@Res() res: Response) {
     const pdfDoc = this.basicReportsService.helloWorld();
     res.setHeader('Content-Type', 'application/pdf');
@@ -19,8 +19,8 @@ export class BasicReportsController {
     pdfDoc.end();
   }
 
-  @ApiOperation({ summary: 'Get an employment letter' })
   @Get('employment-letter/:employeeId')
+  @ApiOperation({ summary: 'Get an employment letter' })
   async employmentLetter(
     @Res() res: Response,
     @Param('employeeId', ParseIntPipe) employeeId: number,
@@ -28,6 +28,16 @@ export class BasicReportsController {
     const pdfDoc = await this.basicReportsService.employmentLetter(employeeId);
     res.setHeader('Content-Type', 'application/pdf');
     pdfDoc.info.Title = 'Employment Letter';
+    pdfDoc.pipe(res);
+    pdfDoc.end();
+  }
+
+  @Get('countries')
+  @ApiOperation({ summary: 'Get a report of countries' })
+  async countriesReport(@Res() res: Response) {
+    const pdfDoc = await this.basicReportsService.countriesReport();
+    res.setHeader('Content-Type', 'application/pdf');
+    pdfDoc.info.Title = 'Countries';
     pdfDoc.pipe(res);
     pdfDoc.end();
   }
