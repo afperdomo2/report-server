@@ -49,8 +49,6 @@ docker-compose up -d
 
 ## 💾 Bases de datos
 
-En la ruta `/sql/01-employees.sql` se encuentra un script de SQL, con algunos empleados, para ejecutarlo en la base de datos.
-
 ### Servidor de Prima
 
 ```sh
@@ -73,6 +71,11 @@ npx prisma migrate dev --name MigrationName
 # Migraciones - Ejecutar las migraciones y crear la base de datos
 npx prisma migrate dev
 ```
+
+Los siguientes queries permiten agregar datos a las tablas creadas por migraciones:
+
+- `/sql/01-employees.sql`
+- `/sql/02-countries.sql`
 
 ## 🔎 Test
 
