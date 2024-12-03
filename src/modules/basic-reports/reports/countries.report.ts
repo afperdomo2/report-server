@@ -42,6 +42,24 @@ export const getCountriesReport = (countries: Country[]) => {
           ],
         },
       },
+      {
+        layout: 'noBorders',
+        margin: [0, 30, 0, 0],
+        table: {
+          widths: [100, 100],
+          body: [
+            [
+              { text: `Total countries:`, fontSize: 14, bold: true },
+              { text: countries.length.toString(), fontSize: 13 },
+            ],
+          ],
+        },
+      },
+      {
+        text: 'This is a list of countries in the world.',
+        fontSize: 10,
+        margin: [0, 10, 0, 0],
+      },
     ],
   };
   return docDefinition;
