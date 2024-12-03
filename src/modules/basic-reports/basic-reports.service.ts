@@ -8,12 +8,14 @@ import {
   getEmploymentLetterReport,
   getHelloWorldReport,
 } from './reports';
+import { CountriesService } from '../countries/countries.service';
 
 @Injectable()
 export class BasicReportsService {
   constructor(
     private readonly printerService: PrinterService,
     private readonly employeesService: EmployeesService,
+    private readonly countriesService: CountriesService,
   ) {}
 
   helloWorld() {
@@ -36,7 +38,8 @@ export class BasicReportsService {
   }
 
   async countriesReport() {
-    const docDefinition = getCountriesReport();
+    const countries = await this.countriesService.findAll();
+    const docDefinition = getCountriesReport(countries);
     return this.printerService.createPdf(docDefinition);
   }
 }
