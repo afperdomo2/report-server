@@ -3,6 +3,7 @@ import { TDocumentDefinitions } from 'pdfmake/interfaces';
 
 import { PAGE_MARGINS } from 'src/constants';
 import { headerSection } from './sections/header.section';
+import { footerSection } from './sections';
 
 export const getCountriesReport = (countries: Country[]) => {
   const docDefinition: TDocumentDefinitions = {
@@ -10,6 +11,7 @@ export const getCountriesReport = (countries: Country[]) => {
       title: 'Countries Report',
       subTitle: 'List of countries',
     }),
+    footer: footerSection,
     pageOrientation: 'landscape',
     pageMargins: PAGE_MARGINS,
     content: [
