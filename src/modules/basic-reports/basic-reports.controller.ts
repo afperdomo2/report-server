@@ -1,8 +1,16 @@
-import { Controller, Get, Param, ParseIntPipe, Res } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Query,
+  Res,
+} from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 
 import { BasicReportsService } from './basic-reports.service';
+import { FilterCountriesDto } from './dto/filter-countries.dto';
 
 @Controller('basic-reports')
 @ApiTags('Basic Reports')
@@ -34,8 +42,11 @@ export class BasicReportsController {
 
   @Get('countries')
   @ApiOperation({ summary: 'Get a report of countries' })
-  async countriesReport(@Res() res: Response) {
-    const pdfDoc = await this.basicReportsService.countriesReport();
+  async countriesReport(
+    @Res() res: Response,
+    @Query() params: FilterCountriesDto,
+  ) {
+    const pdfDoc = await this.basicReportsService.countriesReport(params);
     res.setHeader('Content-Type', 'application/pdf');
     pdfDoc.info.Title = 'Countries';
     pdfDoc.pipe(res);

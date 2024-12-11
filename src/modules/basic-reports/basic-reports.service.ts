@@ -9,6 +9,7 @@ import {
 } from '../../reports';
 import { CountriesService } from '../countries/countries.service';
 import { EmployeesService } from '../employees/employees.service';
+import { FilterCountriesDto } from './dto/filter-countries.dto';
 
 @Injectable()
 export class BasicReportsService {
@@ -37,8 +38,8 @@ export class BasicReportsService {
     return this.printerService.createPdf(docDefinition);
   }
 
-  async countriesReport() {
-    const countries = await this.countriesService.findAll();
+  async countriesReport(params: FilterCountriesDto) {
+    const countries = await this.countriesService.findAll(params);
     const docDefinition = getCountriesReport(countries);
     return this.printerService.createPdf(docDefinition);
   }
