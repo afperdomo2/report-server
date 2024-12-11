@@ -16,7 +16,8 @@ export const getCountriesReport = (countries: Country[]) => {
     pageMargins: PAGE_MARGINS,
     content: [
       {
-        layout: 'lightHorizontalLines',
+        layout: 'blueTable',
+        // layout: 'lightHorizontalLines',
         table: {
           headerRows: 1,
           widths: [50, 50, 50, '*', '*', '*'],
