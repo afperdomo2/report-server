@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
 
 import { PrinterService } from 'src/shared/printer/printer.service';
-import { EmployeesService } from '../employees/employees.service';
 import {
   EmployeementLetterData,
   getCountriesReport,
   getEmploymentLetterReport,
   getHelloWorldReport,
-} from './reports';
+} from '../../reports';
 import { CountriesService } from '../countries/countries.service';
+import { EmployeesService } from '../employees/employees.service';
 
 @Injectable()
 export class BasicReportsService {
