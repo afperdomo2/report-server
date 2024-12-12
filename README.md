@@ -76,6 +76,7 @@ Los siguientes queries permiten agregar datos a las tablas creadas por migracion
 
 - `/sql/01-employees.sql`
 - `/sql/02-countries.sql`
+- `/sql/03-master-detail.sql`
 
 ## 🔎 Test
 
