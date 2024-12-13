@@ -6,6 +6,13 @@ import {
 import { MARGIN_X, PAGE_MARGINS } from 'src/constants';
 import { footerSection } from './sections';
 import { CurrencyFormatter } from 'src/utils';
+import { Order } from '@prisma/client';
+
+export interface ReportValues {
+  title?: string;
+  subtitle?: string;
+  data: Order;
+}
 
 const logo: Content = {
   image: 'src/assets/tucan-banner.png',
@@ -18,7 +25,10 @@ const styles: StyleDictionary = {
   header: { fontSize: 20, bold: true, margin: [0, 0, 0, 15] },
 };
 
-export const orderByIdReport = (): TDocumentDefinitions => {
+export const orderByIdReport = (value: ReportValues): TDocumentDefinitions => {
+  const { data } = value;
+  console.log('🚀 ~ orderByIdReport ~ data:', data);
+
   return {
     styles,
     header: logo,

@@ -6,6 +6,7 @@ import { CountriesModule } from './modules/countries/countries.module';
 import { EmployeesModule } from './modules/employees/employees.module';
 import { StoreReportsModule } from './modules/store-reports/store-reports.module';
 import { PrinterModule } from './shared/printer/printer.module';
+import { OrdersModule } from './modules/orders/orders.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { PrinterModule } from './shared/printer/printer.module';
     EmployeesModule,
     CountriesModule,
     StoreReportsModule,
+    OrdersModule,
   ],
   controllers: [],
   providers: [],
