@@ -4,6 +4,7 @@ import {
   TDocumentDefinitions,
 } from 'pdfmake/interfaces';
 import { MARGIN_X, PAGE_MARGINS } from 'src/constants';
+import { footerSection } from './sections';
 
 const logo: Content = {
   image: 'src/assets/tucan-banner.png',
@@ -20,6 +21,7 @@ export const orderByIdReport = (): TDocumentDefinitions => {
   return {
     styles,
     header: logo,
+    footer: footerSection,
     pageMargins: PAGE_MARGINS,
     content: [
       { text: 'Tucan Code', style: 'header' },
@@ -34,7 +36,7 @@ export const orderByIdReport = (): TDocumentDefinitions => {
           },
           {
             text: [
-              'Order N°: 1234\n',
+              { text: 'Order N° 1234\n', bold: true },
               'Date: 2021-09-01\n',
               'Expected Delivery: 2021-09-01',
             ],
@@ -47,6 +49,14 @@ export const orderByIdReport = (): TDocumentDefinitions => {
         fit: 80,
         alignment: 'right',
         margin: [0, 10],
+      },
+      {
+        text: [
+          { text: 'Bill to:\n', bold: true },
+          'Company name: Flamenco S.A.\n',
+          'Address: 678 Elm Street, pringfield, IL 62705, USA\n',
+          'Phone: 217-555-6666',
+        ],
       },
     ],
   };
