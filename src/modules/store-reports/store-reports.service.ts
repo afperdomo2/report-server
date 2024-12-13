@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/database/prisma/prisma.service';
-import { getHelloWorldReport } from 'src/reports';
+import { orderByIdReport } from 'src/reports';
 
 import { PrinterService } from 'src/shared/printer/printer.service';
 
@@ -12,7 +12,8 @@ export class StoreReportsService {
   ) {}
 
   async orderByIdReport(orderId: number) {
-    const docDefinition = getHelloWorldReport({ name: `Order ${orderId}` });
+    console.log('🚀orderId:', orderId);
+    const docDefinition = orderByIdReport();
     return this.printerService.createPdf(docDefinition);
   }
 }
