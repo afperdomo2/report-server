@@ -25,21 +25,28 @@ export const orderByIdReport = (): TDocumentDefinitions => {
       { text: 'Tucan Code', style: 'header' },
       {
         columns: [
-          { text: 'Address: 1234 Elm Street' },
-          { text: 'Order N°: 1234', alignment: 'right' },
+          {
+            text: [
+              'Address: 1234 Elm Street\n',
+              'Springfield, IL 62704, USA\n',
+              'Phone:  217-555-5555',
+            ],
+          },
+          {
+            text: [
+              'Order N°: 1234\n',
+              'Date: 2021-09-01\n',
+              'Expected Delivery: 2021-09-01',
+            ],
+            alignment: 'right',
+          },
         ],
       },
       {
-        columns: [
-          { text: 'Springfield, IL 62704, USA' },
-          { text: 'Date: 2021-09-01', alignment: 'right' },
-        ],
-      },
-      {
-        columns: [
-          { text: 'Phone:  217-555-5555' },
-          { text: 'Expected Delivery: 2021-09-01', alignment: 'right' },
-        ],
+        qr: 'https://tucancode.com',
+        fit: 80,
+        alignment: 'right',
+        margin: [0, 10],
       },
     ],
   };
