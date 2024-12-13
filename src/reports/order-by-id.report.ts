@@ -5,6 +5,7 @@ import {
 } from 'pdfmake/interfaces';
 import { MARGIN_X, PAGE_MARGINS } from 'src/constants';
 import { footerSection } from './sections';
+import { CurrencyFormatter } from 'src/utils';
 
 const logo: Content = {
   image: 'src/assets/tucan-banner.png',
@@ -57,6 +58,64 @@ export const orderByIdReport = (): TDocumentDefinitions => {
           'Address: 678 Elm Street, pringfield, IL 62705, USA\n',
           'Phone: 217-555-6666',
         ],
+      },
+      {
+        layout: 'headerLineOnly',
+        margin: [0, 20],
+        table: {
+          headerRows: 1,
+          widths: [50, '*', 'auto', 'auto', 'auto'],
+          body: [
+            ['ID', 'Description', 'Quantity', 'Price', 'Total'],
+            [
+              '1',
+              'Product 1',
+              '2',
+              '$10.00',
+              { text: CurrencyFormatter.format(20), alignment: 'right' },
+            ],
+            [
+              '2',
+              'Product 2',
+              '1',
+              '$20.00',
+              { text: CurrencyFormatter.format(20), alignment: 'right' },
+            ],
+            [
+              '3',
+              'Product 3',
+              '3',
+              '$30.00',
+              { text: CurrencyFormatter.format(20), alignment: 'right' },
+            ],
+            ['', '', '', '', ''],
+            [
+              '',
+              '',
+              '',
+              { text: 'Subtotal:', bold: true, alignment: 'right' },
+              { text: CurrencyFormatter.format(20), alignment: 'right' },
+            ],
+            [
+              '',
+              '',
+              '',
+              { text: 'Tax (10%):', bold: true, alignment: 'right' },
+              { text: CurrencyFormatter.format(20), alignment: 'right' },
+            ],
+            [
+              '',
+              '',
+              '',
+              { text: 'Total:', bold: true, alignment: 'right' },
+              {
+                text: CurrencyFormatter.format(20),
+                bold: true,
+                alignment: 'right',
+              },
+            ],
+          ],
+        },
       },
     ],
   };
