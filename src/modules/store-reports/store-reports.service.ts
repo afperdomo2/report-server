@@ -13,9 +13,9 @@ export class StoreReportsService {
 
   async orderByIdReport(orderId: number) {
     const order = await this.ordersService.findById(orderId);
-    // console.log('🚀 ~ StoreReportsService ~ orderByIdReport ~ order:', order);
+    console.log(JSON.stringify(order, null, 2));
 
-    const docDefinition = orderByIdReport({ data: order });
+    const docDefinition = orderByIdReport({ order: order as any });
     return this.printerService.createPdf(docDefinition);
   }
 }

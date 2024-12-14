@@ -1,17 +1,51 @@
+import moment from 'moment';
 import {
   Content,
   StyleDictionary,
   TDocumentDefinitions,
 } from 'pdfmake/interfaces';
 import { MARGIN_X, PAGE_MARGINS } from 'src/constants';
-import { footerSection } from './sections';
 import { CurrencyFormatter } from 'src/utils';
-import { Order } from '@prisma/client';
+import { footerSection } from './sections';
+
+export interface CompleteOrder {
+  orderId: number;
+  customerId: number;
+  orderDate: Date;
+  customer: Customer;
+  orderDetails: OrderDetail[];
+}
+
+export interface Customer {
+  customerId: number;
+  customerName: string;
+  contactName: string;
+  address: string;
+  city: string;
+  postalCode: string;
+  country: string;
+}
+
+export interface OrderDetail {
+  orderDetailId: number;
+  orderId: number;
+  productId: number;
+  quantity: number;
+  product: Product;
+}
+
+export interface Product {
+  productId: number;
+  productName: string;
+  categoryId: number;
+  unit: string;
+  price: string;
+}
 
 export interface ReportValues {
   title?: string;
   subtitle?: string;
-  data: Order;
+  order: CompleteOrder;
 }
 
 const logo: Content = {
@@ -26,8 +60,14 @@ const styles: StyleDictionary = {
 };
 
 export const orderByIdReport = (value: ReportValues): TDocumentDefinitions => {
-  const { data } = value;
-  console.log('🚀 ~ orderByIdReport ~ data:', data);
+  const { order } = value;
+  const { customer, orderDetails } = order;
+  const subTotal = orderDetails.reduce(
+    (acc, detail) => acc + +detail.product.price * detail.quantity,
+    0,
+  );
+  const tax = subTotal * 0.1;
+  const total = subTotal + tax;
 
   return {
     styles,
@@ -47,9 +87,9 @@ export const orderByIdReport = (value: ReportValues): TDocumentDefinitions => {
           },
           {
             text: [
-              { text: 'Order N° 1234\n', bold: true },
-              'Date: 2021-09-01\n',
-              'Expected Delivery: 2021-09-01',
+              { text: `Order N° ${order.orderId}\n`, bold: true },
+              `Date: ${moment(order.orderDate).format('DD-MM-YYYY')}\n`,
+              `Expiration date: ${moment(order.orderDate).format('DD-MM-YYYY')}`,
             ],
             alignment: 'right',
           },
@@ -64,8 +104,9 @@ export const orderByIdReport = (value: ReportValues): TDocumentDefinitions => {
       {
         text: [
           { text: 'Bill to:\n', bold: true },
-          'Company name: Flamenco S.A.\n',
-          'Address: 678 Elm Street, pringfield, IL 62705, USA\n',
+          `Company: ${customer.contactName}\n`,
+          `Contact name: ${customer.customerName}\n`,
+          `Address: ${customer.address}, ${customer.city}-${customer.country}\n`,
           'Phone: 217-555-6666',
         ],
       },
@@ -77,41 +118,35 @@ export const orderByIdReport = (value: ReportValues): TDocumentDefinitions => {
           widths: [50, '*', 'auto', 'auto', 'auto'],
           body: [
             ['ID', 'Description', 'Quantity', 'Price', 'Total'],
-            [
-              '1',
-              'Product 1',
-              '2',
-              '$10.00',
-              { text: CurrencyFormatter.format(20), alignment: 'right' },
-            ],
-            [
-              '2',
-              'Product 2',
-              '1',
-              '$20.00',
-              { text: CurrencyFormatter.format(20), alignment: 'right' },
-            ],
-            [
-              '3',
-              'Product 3',
-              '3',
-              '$30.00',
-              { text: CurrencyFormatter.format(20), alignment: 'right' },
-            ],
+            ...orderDetails.map((detail) => [
+              detail.productId.toString(),
+              detail.product.productName,
+              { text: detail.quantity.toString(), alignment: 'right' },
+              {
+                text: CurrencyFormatter.format(+detail.product.price),
+                alignment: 'right',
+              },
+              {
+                text: CurrencyFormatter.format(
+                  +detail.product.price * detail.quantity,
+                ),
+                alignment: 'right',
+              },
+            ]),
             ['', '', '', '', ''],
             [
               '',
               '',
               '',
               { text: 'Subtotal:', bold: true, alignment: 'right' },
-              { text: CurrencyFormatter.format(20), alignment: 'right' },
+              { text: CurrencyFormatter.format(subTotal), alignment: 'right' },
             ],
             [
               '',
               '',
               '',
               { text: 'Tax (10%):', bold: true, alignment: 'right' },
-              { text: CurrencyFormatter.format(20), alignment: 'right' },
+              { text: CurrencyFormatter.format(tax), alignment: 'right' },
             ],
             [
               '',
@@ -119,7 +154,7 @@ export const orderByIdReport = (value: ReportValues): TDocumentDefinitions => {
               '',
               { text: 'Total:', bold: true, alignment: 'right' },
               {
-                text: CurrencyFormatter.format(20),
+                text: CurrencyFormatter.format(total),
                 bold: true,
                 alignment: 'right',
               },
