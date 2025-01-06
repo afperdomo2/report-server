@@ -20,6 +20,8 @@ npm install
 Librerías:
 
 - [pdfmake](https://pdfmake.github.io/docs/0.1/)
+- [chartjs](https://www.chartjs.org/)
+- [quickchart](https://quickchart.io/documentation/)
 
 ## 🚀 Running the app
 
