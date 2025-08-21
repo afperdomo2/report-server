@@ -5,3 +5,4 @@ export * from './hello-world.report';
 export * from './order-by-id.report';
 export * from './sections';
 export * from './statistics.report';
+export * from './community.report';

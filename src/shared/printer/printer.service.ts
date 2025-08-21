@@ -45,6 +45,10 @@ const customTableLayout: Record<string, CustomTableLayout> = {
       return i % 2 === 0 ? '#f6f5f5' : null;
     },
   },
+  borderBlue: {
+    hLineColor: () => '#5f96d4',
+    vLineColor: () => '#5f96d4',
+  },
 };
 
 @Injectable()

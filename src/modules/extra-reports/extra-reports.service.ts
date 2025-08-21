@@ -3,9 +3,9 @@ import fs from 'fs';
 import { Injectable } from '@nestjs/common';
 import { TDocumentDefinitions } from 'pdfmake/interfaces';
 import { PAGE_MARGINS } from 'src/constants';
-import { footerSection, headerSection } from 'src/reports';
+import { footerSection, getCommunityReport, headerSection } from 'src/reports';
 import { PrinterService } from 'src/shared/printer/printer.service';
-import { getHtmlContent } from 'src/utils/html-to-pdfmake.util';
+import { getHtmlContent } from 'src/utils';
 
 @Injectable()
 export class ExtraReportsService {
@@ -26,6 +26,11 @@ export class ExtraReportsService {
       footer: footerSection,
       content: ['Hola mundo', content],
     };
+    return this.printerService.createPdf(docDefinition);
+  }
+
+  generateCommunityReport() {
+    const docDefinition = getCommunityReport();
     return this.printerService.createPdf(docDefinition);
   }
 }
