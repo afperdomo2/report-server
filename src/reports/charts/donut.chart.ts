@@ -13,6 +13,7 @@ export interface DonutOptions {
 
 export const getDonutChart = (options: DonutOptions) => {
   const { entries, position = 'top', title } = options;
+
   const data = {
     labels: entries.map((e) => e.label),
     datasets: [
@@ -24,6 +25,7 @@ export const getDonutChart = (options: DonutOptions) => {
       },
     ],
   };
+
   const config = {
     type: 'doughnut',
     data,
@@ -35,5 +37,6 @@ export const getDonutChart = (options: DonutOptions) => {
       },
     },
   };
+
   return Utils.chartJsToImage(config);
 };
