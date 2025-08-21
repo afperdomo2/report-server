@@ -66,12 +66,16 @@ npx prisma generate
 
 ### Migraciones
 
-```sh
-# Migraciones - Generar una nueva migración
-npx prisma migrate dev --name MigrationName
+Ejecutar las migraciones del proyecto
 
-# Migraciones - Ejecutar las migraciones y crear la base de datos
+```sh
 npx prisma migrate dev
+```
+
+Generar una nueva migración
+
+```sh
+npx prisma migrate dev --name MigrationName
 ```
 
 Los siguientes queries permiten agregar datos a las tablas creadas por migraciones:
