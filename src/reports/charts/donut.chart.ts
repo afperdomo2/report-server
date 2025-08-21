@@ -1,11 +1,11 @@
 import * as Utils from 'src/utils';
 
-interface DonutEntry {
+export interface DonutEntry {
   label: string;
   value: number;
 }
 
-interface DonutOptions {
+export interface DonutOptions {
   entries: DonutEntry[];
   position?: 'left' | 'right' | 'top' | 'bottom';
   title?: string;
@@ -14,7 +14,6 @@ interface DonutOptions {
 export const getDonutChart = (options: DonutOptions) => {
   const { entries, position = 'top', title } = options;
   const data = {
-    // labels: countries.map((country) => country.label),
     labels: entries.map((e) => e.label),
     datasets: [
       {

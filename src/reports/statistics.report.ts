@@ -1,5 +1,7 @@
 import { TDocumentDefinitions } from 'pdfmake/interfaces';
-import { getDonutChart } from './charts/donut.chart';
+import { DonutOptions, getDonutChart } from './charts/donut.chart';
+import { headerSection } from './sections';
+import { PAGE_MARGINS } from 'src/constants';
 
 interface TopCountry {
   country: string;
@@ -17,10 +19,42 @@ export const getStatisticsReport = async (options: ReportOptions) => {
     label: country.country,
     value: country.customers,
   }));
-  const donutOptions = { entries, title: 'Top Countries' };
+  const donutOptions: DonutOptions = { position: 'left', entries };
   const donutChart = await getDonutChart(donutOptions);
   const docDefinition: TDocumentDefinitions = {
-    content: [{ image: donutChart, width: 500 }],
+    pageMargins: PAGE_MARGINS,
+    header: headerSection({
+      title: options.title ?? 'Estadísticas de Clientes',
+      subTitle: options.subtitle ?? 'Top 10 países con más clientes',
+    }),
+    content: [
+      {
+        columns: [
+          {
+            stack: [
+              {
+                text: 'Top 10 países con más clientes',
+                alignment: 'center',
+                margin: [0, 0, 0, 10],
+              },
+              { image: donutChart, width: 360 },
+            ],
+          },
+          {
+            layout: 'lightHorizontalLines',
+            width: 'auto',
+            table: {
+              headerRows: 1,
+              widths: [100, 'auto'],
+              body: [
+                ['País', 'Clientes'],
+                ...options.topCountries.map((c) => [c.country, c.customers]),
+              ],
+            },
+          },
+        ],
+      },
+    ],
   };
   return docDefinition;
 };

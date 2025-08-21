@@ -18,6 +18,7 @@ export const headerSection = (options: HeaderOptions): Content => {
     margin: [0, 20, 0, 0],
     style: { fontSize: 24, bold: true },
   };
+
   const subTitleText: Content = subTitle
     ? { text: subTitle, alignment: 'center', style: { fontSize: 16 } }
     : null;
@@ -27,6 +28,7 @@ export const headerSection = (options: HeaderOptions): Content => {
     : null;
   const headerLogo: Content = showLogo ? LOGO : null;
   const headerDate: Content = showDate ? CURRENT_DAY : null;
+
   return {
     columns: [headerLogo, headerTitle, headerDate],
   };
