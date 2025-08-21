@@ -3,6 +3,7 @@ import { PAGE_MARGINS } from 'src/constants';
 import { DonutOptions, getDonutChart } from './charts/donut.chart';
 import { getLineChart } from './charts/line.chart';
 import { headerSection } from './sections';
+import { getBarChart } from './charts/bar.chart';
 
 interface TopCountry {
   country: string;
@@ -24,9 +25,11 @@ export const getStatisticsReport = async (options: ReportOptions) => {
     })),
   };
 
-  const [donutChart, lineChart] = await Promise.all([
+  const [donutChart, lineChart, barChart1, barChart2] = await Promise.all([
     getDonutChart(donutOptions),
     getLineChart(),
+    getBarChart(),
+    getBarChart(),
   ]);
 
   const docDefinition: TDocumentDefinitions = {
@@ -64,10 +67,28 @@ export const getStatisticsReport = async (options: ReportOptions) => {
       },
       {
         image: lineChart,
-        width: 450,
-        height: 200,
+        width: 480,
+        height: 230,
         alignment: 'center',
         margin: [0, 20, 0, 0],
+      },
+      {
+        margin: [0, 20, 0, 0],
+        columnGap: 10,
+        columns: [
+          {
+            image: barChart1,
+            width: 250,
+            height: 170,
+            alignment: 'center',
+          },
+          {
+            image: barChart2,
+            width: 250,
+            height: 170,
+            alignment: 'center',
+          },
+        ],
       },
     ],
   };

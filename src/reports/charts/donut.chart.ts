@@ -11,7 +11,7 @@ export interface DonutOptions {
   title?: string;
 }
 
-export const getDonutChart = (options: DonutOptions) => {
+export const getDonutChart = async (options: DonutOptions) => {
   const { entries, position = 'top', title } = options;
 
   const data = {
