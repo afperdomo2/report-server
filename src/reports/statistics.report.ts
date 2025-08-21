@@ -1,9 +1,10 @@
 import { TDocumentDefinitions } from 'pdfmake/interfaces';
 import { PAGE_MARGINS } from 'src/constants';
+import { getBarChart } from './charts/bar.chart';
 import { DonutOptions, getDonutChart } from './charts/donut.chart';
 import { getLineChart } from './charts/line.chart';
-import { headerSection } from './sections';
-import { getBarChart } from './charts/bar.chart';
+import { getRadarChart } from './charts/radar.chart';
+import { footerSection, headerSection } from './sections';
 
 interface TopCountry {
   country: string;
@@ -25,11 +26,11 @@ export const getStatisticsReport = async (options: ReportOptions) => {
     })),
   };
 
-  const [donutChart, lineChart, barChart1, barChart2] = await Promise.all([
+  const [donutChart, lineChart, barChart, radarChart] = await Promise.all([
     getDonutChart(donutOptions),
     getLineChart(),
     getBarChart(),
-    getBarChart(),
+    getRadarChart(),
   ]);
 
   const docDefinition: TDocumentDefinitions = {
@@ -38,6 +39,7 @@ export const getStatisticsReport = async (options: ReportOptions) => {
       title: options.title ?? 'Estadísticas de Clientes',
       subTitle: options.subtitle ?? 'Top 10 países con más clientes',
     }),
+    footer: footerSection,
     content: [
       {
         columns: [
@@ -77,13 +79,13 @@ export const getStatisticsReport = async (options: ReportOptions) => {
         columnGap: 10,
         columns: [
           {
-            image: barChart1,
+            image: barChart,
             width: 250,
             height: 170,
             alignment: 'center',
           },
           {
-            image: barChart2,
+            image: radarChart,
             width: 250,
             height: 170,
             alignment: 'center',
