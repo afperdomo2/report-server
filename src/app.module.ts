@@ -7,6 +7,7 @@ import { EmployeesModule } from './modules/employees/employees.module';
 import { StoreReportsModule } from './modules/store-reports/store-reports.module';
 import { PrinterModule } from './shared/printer/printer.module';
 import { OrdersModule } from './modules/orders/orders.module';
+import { ExtraReportsModule } from './modules/extra-reports/extra-reports.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { OrdersModule } from './modules/orders/orders.module';
     CountriesModule,
     StoreReportsModule,
     OrdersModule,
+    ExtraReportsModule,
   ],
   controllers: [],
   providers: [],
