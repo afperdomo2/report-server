@@ -28,4 +28,14 @@ export class ExtraReportsController {
     pdfDoc.pipe(res);
     pdfDoc.end();
   }
+
+  @Get('custom-size')
+  @ApiOperation({ summary: 'Get a custom size PDF from HTML' })
+  async getCustomSizeReport(@Res() res: Response) {
+    const pdfDoc = this.extraReportsService.generateCustomSizeReport();
+    res.setHeader('Content-Type', 'application/pdf');
+    pdfDoc.info.Title = 'Custom Size Report';
+    pdfDoc.pipe(res);
+    pdfDoc.end();
+  }
 }

@@ -33,4 +33,33 @@ export class ExtraReportsService {
     const docDefinition = getCommunityReport();
     return this.printerService.createPdf(docDefinition);
   }
+
+  generateCustomSizeReport() {
+    return this.printerService.createPdf({
+      // pageSize: 'TABLOID',
+      pageSize: {
+        width: 200,
+        height: 300,
+      },
+      pageMargins: PAGE_MARGINS,
+      content: [
+        {
+          text: 'Custom Size Report',
+          style: 'header',
+        },
+        {
+          margin: [0, 20],
+          qr: 'https://example.com/custom-size-report',
+          fit: 100,
+          alignment: 'center',
+        },
+        {
+          text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc ut laoreet dictum, enim erat facilisis erat, eu tincidunt urna magna nec enim. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Integer euismod, nisi eu consectetur cursus, nisl erat dictum enim, nec facilisis enim erat nec enim. Etiam euismod, nunc ut laoreet dictum, enim erat facilisis erat, eu tincidunt urna magna nec enim. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Integer euismod, nisi eu consectetur cursus, nisl erat dictum enim, nec facilisis enim erat nec enim.`,
+        },
+        {
+          text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc ut laoreet dictum, enim erat facilisis erat, eu tincidunt urna magna nec enim. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Integer euismod, nisi eu consectetur cursus, nisl erat dictum enim, nec facilisis enim erat nec enim. Etiam euismod, nunc ut laoreet dictum, enim erat facilisis erat, eu tincidunt urna magna nec enim. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Integer euismod, nisi eu consectetur cursus, nisl erat dictum enim, nec facilisis enim erat nec enim.`,
+        },
+      ],
+    });
+  }
 }
