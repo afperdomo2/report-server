@@ -84,7 +84,7 @@ Accede a la documentación interactiva de Swagger en:
 docker-compose up -d
 ```
 
-### Configuración de base de datos (Prisma)
+### 🌈 Configuración de base de datos (Prisma)
 
 ```bash
 # Generar cliente de Prisma
@@ -97,7 +97,7 @@ npx prisma migrate dev
 npx prisma studio
 ```
 
-## 💿 Datos de ejemplo
+## 📀 Datos de ejemplo
 
 Los siguientes archivos SQL contienen datos de ejemplo para las tablas:
 
