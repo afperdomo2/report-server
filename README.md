@@ -5,7 +5,7 @@
 API REST desarrollada con **NestJS** para la generación de reportes en PDF con diferentes tipos de contenido: tablas, gráficos, cartas de empleo, estadísticas de tienda y reportes personalizados desde HTML.
 
 <div align="center">
-  <img src="assets/images/estadisticas.png" alt="Ejemplo de reporte de estadísticas" width="470">
+  <img src="assets/images/estadisticas.png" alt="Ejemplo de reporte de estadísticas" width="600">
 </div>
 
 > Ejemplo de reporte PDF generado
