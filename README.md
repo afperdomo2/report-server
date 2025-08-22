@@ -5,12 +5,10 @@
 API REST desarrollada con **NestJS** para la generación de reportes en PDF con diferentes tipos de contenido: tablas, gráficos, cartas de empleo, estadísticas de tienda y reportes personalizados desde HTML.
 
 <div align="center">
-  <img src="assets/images/swagger.png" alt="Documentación Swagger" width="450" style="margin-right: 1%;">
-  <img src="assets/images/reporte.png" alt="Ejemplo de reporte PDF generado" width="429" style="margin-right: 1%;">
-  <img src="assets/images/estadisticas.png" alt="Ejemplo de reporte de estadísticas" width="429" style="margin-right: 1%;">
+  <img src="assets/images/estadisticas.png" alt="Ejemplo de reporte de estadísticas" width="470">
 </div>
 
-> Ejemplo de reporte PDF generado y documentación Swagger de la API
+> Ejemplo de reporte PDF generado
 
 ### ✨ Características principales
 
